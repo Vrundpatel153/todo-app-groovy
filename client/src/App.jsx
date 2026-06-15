@@ -50,11 +50,18 @@ export default function App() {
 
   return (
     <main style={styles.page}>
-      <section style={styles.app}>
+      <section style={styles.notebook}>
+        <div style={styles.spiral} aria-hidden="true">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <span key={index} style={styles.ring} />
+          ))}
+        </div>
+        <div style={styles.marginLine} aria-hidden="true" />
+
         <header style={styles.header}>
           <div>
-            <p style={styles.kicker}>Today</p>
-            <h1 style={styles.title}>TODO</h1>
+            <p style={styles.kicker}>Today's page</p>
+            <h1 style={styles.title}>Todo Notes</h1>
           </div>
           <div style={styles.count}>
             <strong style={styles.countNumber}>{remaining}</strong>
@@ -66,7 +73,7 @@ export default function App() {
           <input
             value={text}
             onChange={(event) => setText(event.target.value)}
-            placeholder="What needs doing?"
+            placeholder="Write a task..."
             style={styles.input}
           />
           <button type="submit" style={styles.button}>
@@ -75,7 +82,7 @@ export default function App() {
         </form>
 
         {todos.length === 0 ? (
-          <div style={styles.empty}>No todos yet. Add your first one.</div>
+          <div style={styles.empty}>This page is blank. Add your first task.</div>
         ) : (
           <ul style={styles.list}>
             {todos.map((todo) => (
@@ -111,33 +118,65 @@ const styles = {
     minHeight: "100vh",
     display: "grid",
     placeItems: "center",
-    padding: 20,
+    padding: 24,
     boxSizing: "border-box",
     fontFamily:
-      "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
+      "Georgia, Cambria, Times New Roman, serif",
     background:
-      "linear-gradient(135deg, #f7f3ea 0%, #e8f0ee 48%, #f1e4df 100%)",
-    color: "#202124"
+      "linear-gradient(135deg, #d7e0dc 0%, #f1e6d1 52%, #cfd9e5 100%)",
+    color: "#26221d"
   },
-  app: {
-    width: "min(560px, 100%)",
-    padding: 28,
+  notebook: {
+    position: "relative",
+    width: "min(680px, 100%)",
+    minHeight: 650,
+    padding: "54px 42px 46px 92px",
     boxSizing: "border-box",
-    background: "rgba(255, 255, 255, 0.9)",
-    border: "1px solid rgba(32, 33, 36, 0.08)",
+    overflow: "hidden",
+    background:
+      "repeating-linear-gradient(#fffaf0 0 33px, #b8d4ea 34px 35px), linear-gradient(90deg, rgba(255,255,255,0.7), rgba(255,255,255,0))",
+    border: "1px solid #ded0b4",
     borderRadius: 8,
-    boxShadow: "0 24px 70px rgba(47, 55, 70, 0.16)"
+    boxShadow:
+      "0 26px 70px rgba(63, 54, 41, 0.28), inset 0 0 45px rgba(154, 119, 68, 0.08)"
+  },
+  spiral: {
+    position: "absolute",
+    top: 34,
+    bottom: 34,
+    left: 22,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between"
+  },
+  ring: {
+    width: 34,
+    height: 18,
+    border: "3px solid #6e7884",
+    borderRight: 0,
+    borderRadius: "14px 0 0 14px",
+    background: "rgba(255, 250, 240, 0.7)",
+    boxShadow: "inset 0 1px 2px rgba(255,255,255,0.7)"
+  },
+  marginLine: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 74,
+    width: 2,
+    background: "rgba(205, 79, 79, 0.42)"
   },
   header: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     gap: 16,
-    marginBottom: 22
+    marginBottom: 26,
+    position: "relative"
   },
   kicker: {
-    margin: "0 0 4px",
-    color: "#687076",
+    margin: "0 0 6px",
+    color: "#7a6b56",
     fontSize: 13,
     fontWeight: 700,
     textTransform: "uppercase",
@@ -145,103 +184,124 @@ const styles = {
   },
   title: {
     margin: 0,
-    fontSize: 38,
-    lineHeight: 1,
-    fontWeight: 800,
+    fontFamily:
+      "Bradley Hand ITC, Segoe Print, Comic Sans MS, Georgia, serif",
+    fontSize: 44,
+    lineHeight: 1.05,
+    fontWeight: 700,
     letterSpacing: 0
   },
   count: {
     display: "grid",
     placeItems: "center",
-    minWidth: 72,
-    minHeight: 58,
-    border: "1px solid #d5ded9",
+    minWidth: 86,
+    minHeight: 64,
+    transform: "rotate(2deg)",
+    border: "1px solid #d8c49c",
     borderRadius: 8,
-    background: "#f8fbf9",
-    color: "#405149",
-    fontSize: 12
+    background: "#fff3b8",
+    color: "#5c4a22",
+    fontSize: 12,
+    boxShadow: "0 7px 16px rgba(75, 60, 28, 0.14)"
   },
   countNumber: {
     display: "block",
-    fontSize: 22
+    fontSize: 24
   },
   form: {
     display: "flex",
     gap: 10,
-    marginBottom: 18
+    marginBottom: 22,
+    position: "relative"
   },
   input: {
     flex: 1,
     minWidth: 0,
-    padding: "13px 14px",
-    border: "1px solid #cfd7d3",
-    borderRadius: 8,
-    fontSize: 16
+    padding: "12px 14px",
+    border: "0",
+    borderBottom: "2px solid #8aa9c0",
+    borderRadius: 0,
+    outline: "none",
+    fontFamily:
+      "Bradley Hand ITC, Segoe Print, Comic Sans MS, Georgia, serif",
+    fontSize: 20,
+    background: "rgba(255, 250, 240, 0.35)",
+    color: "#24313d"
   },
   button: {
-    padding: "0 18px",
+    padding: "0 20px",
     border: 0,
     borderRadius: 8,
-    background: "#215c4f",
+    background: "#2f5d8c",
     color: "#fff",
     cursor: "pointer",
     fontSize: 15,
-    fontWeight: 700
+    fontWeight: 700,
+    boxShadow: "0 5px 0 #1f3f61"
   },
   empty: {
-    padding: "28px 16px",
-    border: "1px dashed #c7d0cc",
-    borderRadius: 8,
-    background: "#fbfcfb",
-    color: "#687076",
-    textAlign: "center"
+    padding: "34px 12px",
+    color: "#8b7a62",
+    textAlign: "center",
+    fontFamily:
+      "Bradley Hand ITC, Segoe Print, Comic Sans MS, Georgia, serif",
+    fontSize: 22
   },
   list: {
     display: "grid",
-    gap: 10,
+    gap: 0,
     padding: 0,
     margin: 0,
-    listStyle: "none"
+    listStyle: "none",
+    position: "relative"
   },
   item: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     gap: 12,
-    padding: "12px 12px",
-    border: "1px solid #e4e9e6",
-    borderRadius: 8,
-    background: "#fff"
+    minHeight: 35,
+    padding: "0 0 0 4px",
+    background: "transparent"
   },
   label: {
     display: "flex",
     alignItems: "center",
-    gap: 10,
-    minWidth: 0
+    gap: 12,
+    minWidth: 0,
+    flex: 1
   },
   checkbox: {
-    width: 18,
-    height: 18,
-    accentColor: "#215c4f",
+    width: 19,
+    height: 19,
+    accentColor: "#2f5d8c",
     flex: "0 0 auto"
   },
   todoText: {
     overflowWrap: "anywhere",
-    lineHeight: 1.4
+    lineHeight: 1.35,
+    fontFamily:
+      "Bradley Hand ITC, Segoe Print, Comic Sans MS, Georgia, serif",
+    fontSize: 22,
+    color: "#24313d"
   },
   doneText: {
-    color: "#8a9490",
+    color: "#8a8073",
     textDecoration: "line-through",
     overflowWrap: "anywhere",
-    lineHeight: 1.4
+    lineHeight: 1.35,
+    fontFamily:
+      "Bradley Hand ITC, Segoe Print, Comic Sans MS, Georgia, serif",
+    fontSize: 22
   },
   delete: {
-    padding: "8px 10px",
-    border: "1px solid #e4c7c2",
-    borderRadius: 8,
-    background: "#fff",
-    color: "#9a3f35",
+    padding: "4px 8px",
+    border: 0,
+    borderRadius: 4,
+    background: "rgba(178, 70, 58, 0.08)",
+    color: "#9b3b31",
     cursor: "pointer",
-    fontWeight: 700
+    fontWeight: 700,
+    fontSize: 13
   }
 };
