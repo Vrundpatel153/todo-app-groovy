@@ -1,4 +1,5 @@
 # todo-app-groovy
+<img width="1898" height="982" alt="image" src="https://github.com/user-attachments/assets/053430ef-2b10-4b03-8e78-87fb01105086" />
 
 ## Installation
 
