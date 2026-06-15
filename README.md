@@ -1,5 +1,27 @@
 # todo-app-groovy
 
+## Installation
+
+Install and run the server:
+
+```bash
+cd server
+npm install
+npm start
+```
+
+Install and run the client in a second terminal:
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+Open the app at `http://127.0.0.1:3000`. The API runs at `http://localhost:5000/todos`.
+
+## Prompt
+
 Create a minimal full-stack TODO app, React + Node, in this structure:
 
 ```
